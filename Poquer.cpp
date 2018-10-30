@@ -8,6 +8,7 @@ enum valores {ZERO, DOIS=1, TRES, QUATRO, CINCO, SEIS, SETE, OITO, NOVE, DEZ, VA
 void testaMaior();
 void testaTem1Par();
 void testaTem2Pares(void);
+void testaTemTrinca(void);
 
 
 typedef struct {
@@ -36,7 +37,7 @@ carta tem1Par (carta *mao){
     par.naipe=NENHUM;
     par.valor=ZERO;
      
-    for (int i=0; i<5; i++){
+    for (int i=0; i<4; i++){
         for (int j=i+1;j<5; j++)
             if (mao[i].valor == mao[j].valor)
               return mao[i];
@@ -53,7 +54,7 @@ carta tem2Pares (carta *mao){
     par2.valor=ZERO;
     bool achou = false; 
      
-    for (int i=0; i<5 && !achou; i++){
+    for (int i=0; i<4 && !achou; i++){
         for (int j=i+1;j<5; j++)
             if (mao[i].valor == mao[j].valor) {
                 if (par1.valor == ZERO) {
@@ -84,7 +85,17 @@ carta tem2Pares (carta *mao){
 carta temTrinca (carta *mao){
     
     carta trinca;
-    
+    trinca.naipe=NENHUM;
+    trinca.valor=ZERO;
+     
+    for (int i=0; i<3; i++){
+        for (int j=i+1;j<4; j++)
+                for (int k=j+1;k<5; k++)
+            if ((mao[i].valor == mao[j].valor) && (mao[j].valor == mao[k].valor))
+              return mao[i];
+           
+    }
+
     return trinca;
 }
 
@@ -95,6 +106,7 @@ int main()
     testaMaior();
     testaTem1Par();
     testaTem2Pares();
+    testaTemTrinca();
     
     return 0;
 }
